@@ -1,0 +1,22 @@
+/* leny/twadé
+ *
+ * /src/styles.scss - Styles
+ *
+ * coded by leny@flatLand!
+ * started at 16/02/2021
+ */
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: yellow;
+}
+
+#app {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
