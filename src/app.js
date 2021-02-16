@@ -8,14 +8,10 @@
 
 import "./styles.scss";
 
-import {
-    Scene,
-    PerspectiveCamera,
-    WebGLRenderer,
-    BoxGeometry,
-    MeshBasicMaterial,
-    Mesh,
-} from "three";
+import {Scene, PerspectiveCamera, WebGLRenderer, Color} from "three";
+import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
+
+import speederURL from "url:./data/models/speeder.glb";
 
 const {innerWidth, innerHeight} = window;
 const [width, height] = [innerWidth, innerHeight];
@@ -28,18 +24,37 @@ renderer.setSize(width, height);
 
 document.querySelector("#app").appendChild(renderer.domElement);
 
-const geometry = new BoxGeometry();
-const material = new MeshBasicMaterial({color: 0x00ff00});
-const cube = new Mesh(geometry, material);
+camera.position.x = 2.5;
+camera.position.y = 2.5;
+camera.position.z = 10;
 
-scene.add(cube);
+const loader = new GLTFLoader();
 
-camera.position.z = 5;
+let speeder;
+
+loader.load(
+    speederURL,
+    gltf => {
+        gltf.scene.traverse(child => {
+            if (child.isMesh) {
+                child.material.emissive = child.material.color;
+                child.material.emissiveMap = child.material.map;
+            }
+        });
+        scene.add(gltf.scene);
+        speeder = gltf.scene;
+    },
+    ({loaded, total}) => console.log(`${(loaded / total) * 100}% loaded`),
+    console.error,
+);
 
 const animate = () => {
     requestAnimationFrame(animate);
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+    if (speeder) {
+        speeder.rotation.x += 0.01;
+        speeder.rotation.y += 0.01;
+        speeder.rotation.z += 0.01;
+    }
     renderer.render(scene, camera);
 };
 
