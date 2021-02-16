@@ -1,0 +1,23 @@
+{
+  "name": "@leny/twade",
+  "version": "0.1.0",
+  "description": "ThreeJS learning playground",
+  "scripts": {
+    "build": "npx parcel build ./src/index.html",
+    "work": "npx parcel serve ./src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leny/twade.git"
+  },
+  "author": "leny <info@flatland.be>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leny/twade/issues"
+  },
+  "homepage": "https://github.com/leny/twade#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "parcel": "next"
+  }
+}
